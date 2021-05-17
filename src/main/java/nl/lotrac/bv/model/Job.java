@@ -32,8 +32,10 @@ public class Job {
     @Column
     private String department;
 
+//
+//    @ManyToMany(mappedBy = "jobs")
+    @ManyToMany
 
-    @ManyToMany(mappedBy = "jobs")
     private List<OrderLine> orderlines = new ArrayList<OrderLine>();
 
 }

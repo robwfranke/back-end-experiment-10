@@ -33,22 +33,22 @@ public class OrderLine {
     private Integer quantity;
 
 
-    public void addOrderLine(OrderLine p){
-        this.orderLines.add(p);
-        p.getOrderLines().add(this);
-    }
-
-    public void removeOrderLine(OrderLine p){
-        this.orderLines.remove(p);
-        p.getOrderLines().remove(this);
-    }
+//    public void addOrderLine(OrderLine p){
+//        this.orderLines.add(p);
+//        p.getOrderLines().add(this);
+//    }
+//
+//    public void removeOrderLine(OrderLine p){
+//        this.orderLines.remove(p);
+//        p.getOrderLines().remove(this);
+//    }
 
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "fk_order")
     private Order order;
-
+//
     @ManyToMany
     @JoinTable(name = "a_b",
             joinColumns = {@JoinColumn(name = "fk_orderLine")},

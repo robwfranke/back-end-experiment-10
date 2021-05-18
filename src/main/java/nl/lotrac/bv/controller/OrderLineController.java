@@ -1,8 +1,11 @@
 package nl.lotrac.bv.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import nl.lotrac.bv.controller.model.CreateOrderLine;
 import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.model.OrderLine;
+import nl.lotrac.bv.repository.OrderRepository;
 import nl.lotrac.bv.service.OrderLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,22 +20,34 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = "/orderlines")
 
+
+@Slf4j
 public class OrderLineController {
+
+
+    @Autowired
+    private OrderRepository orderRepository;
+
 
     @Autowired
     private OrderLineService orderLineService;
 
     @PostMapping(value="/create")
-    public ResponseEntity<Object>createNewOrderLine(@RequestBody OrderLine orderLine){
 
-        String newOrderLineName= orderLineService.createNewOrderLine(orderLine);
+    public ResponseEntity<OrderLine>createNewOrderLine(@RequestBody CreateOrderLine createOrderLine ){
+        log.debug(createOrderLine.toString());
 
-        MessageFrontEnd message = new MessageFrontEnd("OrderLine: " + newOrderLineName+ "  created");
+
+
+
+        OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
+
+//        MessageFrontEnd message = new MessageFrontEnd("OrderLine: " + newOrderLineName+ "  created");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
-                .buildAndExpand(newOrderLineName).toUri();
+                .buildAndExpand(orderLine.getItemname()).toUri();
 
-        return ResponseEntity.created(location).body(message);
+        return ResponseEntity.created(location).body(orderLine);
     }
 
 

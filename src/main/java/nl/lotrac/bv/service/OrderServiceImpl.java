@@ -28,12 +28,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String createNewOrder(Order order) {
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
         User user = userRepository.getUserByUsername(username);
+
 
         if (orderRepository.getOrderByOrdername(order.getOrdername()) != null)
             throw new NameExistsException("order exists");
 
 //        jpa weet nu, via de foreign key dat hier username komt te staan
+
         order.setUser(user);
         order.setStatus("pending");
         Order newOrder = orderRepository.save(order);

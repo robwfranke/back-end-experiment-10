@@ -26,6 +26,19 @@ public class BaseController {
     }
 
 
+
+    @GetMapping(value = "/test/{name}")
+    public String hello(@RequestParam(name="name")String name)
+
+    {
+        System.out.println("stop");
+        System.out.println(name);
+
+
+        return "Hello World";
+    }
+
+
     @PostMapping(value="/create")
    public ResponseEntity<User>createNewCustomer(@RequestBody User user){
 

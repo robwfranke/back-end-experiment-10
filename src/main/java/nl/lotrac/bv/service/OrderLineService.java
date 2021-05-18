@@ -1,12 +1,13 @@
 package nl.lotrac.bv.service;
 
+import nl.lotrac.bv.controller.model.CreateOrderLine;
 import nl.lotrac.bv.model.OrderLine;
 
 import java.util.List;
 
 public interface OrderLineService {
 
-   String createNewOrderLine(OrderLine orderLine);
+  OrderLine createNewOrderLine(CreateOrderLine orderLine);
 
    public abstract List<OrderLine> getAllOrderLines();
 

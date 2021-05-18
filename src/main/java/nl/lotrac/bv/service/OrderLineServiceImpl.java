@@ -1,11 +1,13 @@
 package nl.lotrac.bv.service;
 
 
+import nl.lotrac.bv.controller.model.CreateOrderLine;
 import nl.lotrac.bv.exceptions.NameExistsException;
 import nl.lotrac.bv.exceptions.NameNotFoundException;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.model.OrderLine;
 import nl.lotrac.bv.repository.OrderLineRepository;
+import nl.lotrac.bv.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,25 +22,27 @@ public class OrderLineServiceImpl implements OrderLineService{
     @Autowired
     private OrderLineRepository orderLineRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
 
     @Override
-    public String createNewOrderLine(OrderLine orderLine) {
+    public OrderLine createNewOrderLine(CreateOrderLine orderLine) {
 
-        if (orderLineRepository.getOrderLineByItemname(orderLine.getItemname()) != null)
+
+        if (orderLineRepository.getOrderLineByItemname(orderLine.getItemName()) != null)
             throw new NameExistsException("orderLine exists");
 
-        OrderLine newOrderLine = orderLineRepository.save(orderLine);
-        return (newOrderLine.getItemname());
+        Order order=orderRepository.getOrderByOrdername(orderLine.getOrderName());
+
+        OrderLine newOrderLine= new OrderLine();
+
+        newOrderLine.setItemname(orderLine.getItemName());
+        newOrderLine.setQuantity(orderLine.getQuantity());
+        newOrderLine.setOrder(order);
+
+        return orderLineRepository.save(newOrderLine);
     }
-
-
-
-
-
-
-
-
-
 
     @Override
     public List<OrderLine> getAllOrderLines(){

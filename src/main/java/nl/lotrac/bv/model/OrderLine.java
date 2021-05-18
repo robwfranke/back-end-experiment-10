@@ -32,18 +32,12 @@ public class OrderLine {
     @Column
     private Integer quantity;
 
+//    @Column
+//    private String ordername;
 
-    public void addOrderLine(OrderLine p){
-        this.orderLines.add(p);
-        p.getOrderLines().add(this);
-    }
 
-    public void removeOrderLine(OrderLine p){
-        this.orderLines.remove(p);
-        p.getOrderLines().remove(this);
-    }
 
-//gedeelte voor order
+    //gedeelte voor order
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "fk_order")
@@ -51,18 +45,15 @@ public class OrderLine {
 //
 
 
-
-
-//    gedeelte voor job
+    //    gedeelte voor job
     @ManyToMany
     @JoinTable(name = "orderline_job",
             joinColumns = {@JoinColumn(name = "fk_orderLine")},
             inverseJoinColumns =
                     {@JoinColumn(name = "fk_job")})
 
-    private List<OrderLine> orderLines =
-            new ArrayList<OrderLine>();
-
+    private List<Job> jobs =
+            new ArrayList<>();
 
 
 }

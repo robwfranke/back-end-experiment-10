@@ -40,7 +40,6 @@ public class OrderLineController {
 
         OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
 
-//        MessageFrontEnd message = new MessageFrontEnd("OrderLine: " + newOrderLineName+ "  created");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(orderLine.getItemname()).toUri();

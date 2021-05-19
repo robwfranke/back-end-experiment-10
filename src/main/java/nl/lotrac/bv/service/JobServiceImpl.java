@@ -2,33 +2,32 @@ package nl.lotrac.bv.service;
 
 
 import nl.lotrac.bv.exceptions.NameExistsException;
-import nl.lotrac.bv.exceptions.NameNotFoundException;
-import nl.lotrac.bv.model.Order;
-import nl.lotrac.bv.model.User;
-import nl.lotrac.bv.repository.OrderLineRepository;
-import nl.lotrac.bv.repository.OrderRepository;
-import nl.lotrac.bv.repository.UserRepository;
+import nl.lotrac.bv.model.Job;
+import nl.lotrac.bv.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements JobService {
 
 
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private JobRepository jobRepository;
 
-    @Autowired
-    private OrderLineRepository orderLineRepository;
+    @Override
+    public String createNewJob(Job job){
+       if(jobRepository.getJobByJobname(job.getJobname()) != null)
+           throw new NameExistsException("order exists");
+       job.setJobname(job.getJobname());
+       job.setDepartment(job.getDepartment());
+       Job newJob = jobRepository.save(job);
+       return (newJob.getJobname());
+
+
+
+    }
 
 
 }

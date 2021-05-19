@@ -40,11 +40,11 @@ INSERT INTO order_lines (itemname, quantity, fk_order) VALUES ('3001', 3,2);
 INSERT INTO order_lines (itemname, quantity, fk_order) VALUES ('4001', 6,1);
 --
 --
--- INSERT INTO jobs (job_name, department) VALUES ('voordraaien', 'draai afdeling');
--- INSERT INTO jobs (job_name, department) VALUES ('nadraaien', 'draai afdeling');
--- INSERT INTO jobs (job_name, department) VALUES ('voorfrezen', 'frees afdeling');
--- INSERT INTO jobs (job_name, department) VALUES ('nafrezen', 'frees afdeling');
--- INSERT INTO jobs (job_name, department) VALUES ('slijpen', 'slijp afdeling');
+INSERT INTO jobs (jobname, department) VALUES ('voordraaien', 'draai afdeling');
+INSERT INTO jobs (jobname, department) VALUES ('nadraaien', 'draai afdeling');
+INSERT INTO jobs (jobname, department) VALUES ('voorfrezen', 'frees afdeling');
+INSERT INTO jobs (jobname, department) VALUES ('nafrezen', 'frees afdeling');
+INSERT INTO jobs (jobname, department) VALUES ('slijpen', 'slijp afdeling');
 
 
 -- INSERT INTO couple_orderline_jobs (order_line_id, jobs_id) VALUES ('1', '1');

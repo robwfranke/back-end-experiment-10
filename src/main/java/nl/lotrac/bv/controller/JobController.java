@@ -1,7 +1,9 @@
 package nl.lotrac.bv.controller;
 
+import nl.lotrac.bv.model.Job;
 import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.Order;
+import nl.lotrac.bv.service.JobService;
 import nl.lotrac.bv.service.OrderLineService;
 import nl.lotrac.bv.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,22 @@ import java.util.List;
 public class JobController {
 
     @Autowired
-    private OrderLineService orderLineService;
+    private JobService jobService;
 
 
+    //********************************************************************************
+    @PostMapping(value = "/create")
+    public ResponseEntity<Job> createNewJob(@RequestBody Job job) {
+
+        Job newJob = jobService.createNewJob(job);
+
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
+                .buildAndExpand(job.getJobname()).toUri();
+
+        return ResponseEntity.created(location).body(job);
+
+    }
 
 
 }

@@ -11,6 +11,7 @@ import nl.lotrac.bv.model.User;
 import nl.lotrac.bv.repository.OrderLineRepository;
 import nl.lotrac.bv.repository.OrderRepository;
 import nl.lotrac.bv.repository.UserRepository;
+import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,9 +41,13 @@ public class OrderLineServiceImpl implements OrderLineService {
     public OrderLine createNewOrderLine(CreateOrderLine createOrderLine) {
         log.debug(createOrderLine.toString());
 
+//        log.debug(ExtractUserName.Jan("kk"));
+
+
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        String username=ExtractUserName.ExtractUserNameFromJwt();
+//        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         log.debug("!!! username:  " + username);
 
 

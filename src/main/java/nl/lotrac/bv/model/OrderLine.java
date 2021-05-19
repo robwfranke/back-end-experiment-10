@@ -32,9 +32,6 @@ public class OrderLine {
     @Column
     private Integer quantity;
 
-//    @Column
-//    private String ordername;
-
 
 
     //gedeelte voor order

@@ -49,9 +49,14 @@ public class OrderLineServiceImpl implements OrderLineService {
         String ordername1 = order.getOrdername();
         log.debug("!!! ordername: " + ordername1);
 
-
+// via de methode order.getUser kun je met getUsername() haal je de username op die bij deze order hoort.
         if(!order.getUser().getUsername().equals(username))
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+
+
+        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
+            throw new NameExistsException("orderLine exists");
+
 
 //    order heeft de velden:
 //      private long id;
@@ -62,12 +67,6 @@ public class OrderLineServiceImpl implements OrderLineService {
 //
 //        log.debug("ordername:" + order.getOrdername());
 
-        if (orderRepository.getOrderByOrdername(order.getOrdername()) == null)
-            throw new NameExistsException("order nok");
-//
-//
-//        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
-//            throw new NameExistsException("orderLine exists");
 
         log.debug("order Id: " + String.valueOf(order.getId()));
         log.debug("ordername: " + order.getOrdername());
@@ -82,7 +81,7 @@ public class OrderLineServiceImpl implements OrderLineService {
         log.debug("newOrderline Quantity: " + newOrderLine.getQuantity());
 
 
-//  wanneer je nu de order teruggeeft dmv de setter weetJPA via @ManyToOne dat hij dat in de foreignKeymoet zetten
+//  wanneer je nu de order teruggeeft dmv de setter weet JPA via @ManyToOne dat hij dat in de foreignKeymoet zetten
         newOrderLine.setOrder(order);
 
 

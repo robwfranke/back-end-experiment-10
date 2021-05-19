@@ -30,15 +30,15 @@ public class JobController {
 
     //********************************************************************************
     @PostMapping(value = "/create")
-    public ResponseEntity<Job> createNewJob(@RequestBody Job job) {
+    public ResponseEntity<Object> createNewJob(@RequestBody Job job) {
 
-        Job newJob = jobService.createNewJob(job);
+        jobService.createNewJob(job);
 
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(job.getJobname()).toUri();
 
-        return ResponseEntity.created(location).body(job);
+        return new ResponseEntity<>(HttpStatus.CREATED) ;
 
     }
 

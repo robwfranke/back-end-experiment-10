@@ -38,7 +38,7 @@ public class JobController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(job.getJobname()).toUri();
 
-        return new ResponseEntity<>(HttpStatus.CREATED) ;
+        return ResponseEntity.created(location).body(job);
 
     }
 

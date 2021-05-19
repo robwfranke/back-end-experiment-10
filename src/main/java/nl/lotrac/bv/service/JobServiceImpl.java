@@ -19,14 +19,11 @@ public class JobServiceImpl implements JobService {
     @Override
     public String createNewJob(Job job){
        if(jobRepository.getJobByJobname(job.getJobname()) != null)
-           throw new NameExistsException("order exists");
+           throw new NameExistsException("job exists");
        job.setJobname(job.getJobname());
        job.setDepartment(job.getDepartment());
        Job newJob = jobRepository.save(job);
        return (newJob.getJobname());
-
-
-
     }
 
 

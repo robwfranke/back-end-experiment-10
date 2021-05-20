@@ -38,11 +38,9 @@ public class OrderLineServiceImpl implements OrderLineService {
     public OrderLine createNewOrderLine(CreateOrderLine createOrderLine) {
         log.debug(createOrderLine.toString());
 
-//        log.debug(ExtractUserName.Jan("kk"));
-
-
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
+//        check of deze order bestaat
         if(order == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
@@ -55,9 +53,11 @@ public class OrderLineServiceImpl implements OrderLineService {
         log.debug("!!! ordername: " + ordername1);
 
 // via de methode order.getUser kun je met getUsername() haal je de username op die bij deze order hoort.
+//        check of deze order bij de user hoort
         if(!order.getUser().getUsername().equals(username))
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
+//        check of orderline bij deze user bestaat
 
         if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
             throw new NameExistsException("orderLine exists");
@@ -79,7 +79,6 @@ public class OrderLineServiceImpl implements OrderLineService {
 
         OrderLine newOrderLine = new OrderLine();
 
-//        nu nog checken of de orderline bestaat
 
 
         newOrderLine.setItemname(createOrderLine.getItemName());

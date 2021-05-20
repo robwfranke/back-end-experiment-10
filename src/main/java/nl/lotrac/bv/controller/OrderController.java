@@ -32,7 +32,6 @@ public class OrderController {
 
         String newOrderName = orderService.createNewOrder(order);
 
-//        MessageFrontEnd message = new MessageFrontEnd("Order: " + newOrderName + "  created");
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(newOrderName).toUri();
         return ResponseEntity.created(location).body(order);

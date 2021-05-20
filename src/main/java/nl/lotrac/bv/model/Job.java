@@ -34,6 +34,7 @@ public class Job {
 
 //
 ////    @ManyToMany(mappedBy = "jobs")
+    @JsonIgnore
     @ManyToMany(mappedBy = "jobsFromOrderline")
 //
     private List<OrderLine> orderlines;

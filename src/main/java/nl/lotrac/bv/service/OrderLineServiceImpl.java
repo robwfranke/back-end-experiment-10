@@ -43,6 +43,9 @@ public class OrderLineServiceImpl implements OrderLineService {
 
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
+        if(orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName())!= null)
+       throw new NameExistsException("orderline exists");
+
         String username=ExtractUserName.ExtractUserNameFromJwt();
         log.debug("!!! username:  " + username);
 

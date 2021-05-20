@@ -34,12 +34,7 @@ public class OrderLineController {
 
     public ResponseEntity<OrderLine>createNewOrderLine(@RequestBody CreateOrderLine createOrderLine ){
         log.debug(createOrderLine.toString());
-
-
-
-
-        OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
-
+OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(orderLine.getItemname()).toUri();

@@ -43,8 +43,6 @@ public class OrderLineServiceImpl implements OrderLineService {
 
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
-        if(orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName())!= null)
-       throw new NameExistsException("orderline exists");
 
         String username=ExtractUserName.ExtractUserNameFromJwt();
         log.debug("!!! username:  " + username);
@@ -58,8 +56,8 @@ public class OrderLineServiceImpl implements OrderLineService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
 
-        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
-            throw new NameExistsException("orderLine exists");
+//        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
+//            throw new NameExistsException("orderLine exists");
 
 
 //    order heeft de velden:
@@ -77,6 +75,8 @@ public class OrderLineServiceImpl implements OrderLineService {
         log.debug("orderStatus: " + order.getStatus());
 
         OrderLine newOrderLine = new OrderLine();
+
+//        nu nog checken of de orderline bestaat
 
 
         newOrderLine.setItemname(createOrderLine.getItemName());

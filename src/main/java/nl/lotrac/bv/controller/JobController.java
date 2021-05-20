@@ -62,7 +62,7 @@ public class JobController {
     //********************************************************************************
     @GetMapping(value = "/jobsByDepartment/{departmentname}")
     public ResponseEntity<Object> getAllJobsByJob(@PathVariable("departmentname") String departmentname) {
-        List<Job> jobs = jobService.getAllJobsByJob(departmentname);
+        List<Job> jobs = jobService.getAllJobsByDepartment(departmentname);
         return ResponseEntity.ok().body(jobs);
     }
 //********************************************************************************

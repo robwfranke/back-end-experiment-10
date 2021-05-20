@@ -1,6 +1,7 @@
 package nl.lotrac.bv.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import nl.lotrac.bv.exceptions.NameExistsException;
 import nl.lotrac.bv.exceptions.NameNotFoundException;
 import nl.lotrac.bv.model.Job;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+@Slf4j
 @Service
 public class JobServiceImpl implements JobService {
 
@@ -41,8 +44,8 @@ public class JobServiceImpl implements JobService {
 
     @Override
 
-    public Job getOneJobByID(Long id){
-        Optional<Job> job =jobRepository.findById(id);
+    public Job getOneJobByID(Long id) {
+        Optional<Job> job = jobRepository.findById(id);
 
         if (job.isEmpty()) {
             throw new NameNotFoundException("job does not exists");
@@ -52,13 +55,14 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<Job> getAllJobsByJob(String departmentname) {
-//        Job job = jobRepository.getJobByJobname(jobname);
-//        if (job == null)
-//            throw new NameNotFoundException("job not present");
+    public List<Job> getAllJobsByDepartment(String departmentname) {
+
+        if (jobRepository.findAllByDepartment(departmentname).isEmpty())
+            throw new NameNotFoundException("job not present");
+        log.debug("emty");
+
         return jobRepository.findAllByDepartment(departmentname);
     }
-
 
 
 }

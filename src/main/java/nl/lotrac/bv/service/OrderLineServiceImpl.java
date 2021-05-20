@@ -44,7 +44,6 @@ public class OrderLineServiceImpl implements OrderLineService {
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
         String username=ExtractUserName.ExtractUserNameFromJwt();
-//        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         log.debug("!!! username:  " + username);
 
 

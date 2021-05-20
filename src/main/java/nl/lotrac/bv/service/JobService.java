@@ -11,8 +11,9 @@ public interface JobService {
 
     public abstract List<Job> getAllJobs();
 
-    public abstract List<Job>getAllJobsByJob (String departmentname);
+    public abstract List<Job> getAllJobsByDepartment(String departmentname);
 
+//    public abstract getDepartmentByDepartment(departmentname);
 
-    public  abstract Job getOneJobByID(Long id);
+    public abstract Job getOneJobByID(Long id);
 }

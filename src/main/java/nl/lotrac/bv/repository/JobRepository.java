@@ -11,6 +11,8 @@ Job getJobByJobname (String jobname);
 
 List<Job> findAllByDepartment(String departmentname);
 
+Job getDepartmentByDepartment (String departmentname);
+
 
 
 

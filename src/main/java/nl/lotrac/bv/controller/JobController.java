@@ -28,13 +28,6 @@ public class JobController {
     private JobService jobService;
 
 
-    //********************************************************************************
-    @GetMapping(value = "")
-    public ResponseEntity<Object>getAllJobs(){
-        return ResponseEntity.ok().body(jobService.getAllJobs());
-    }
-//********************************************************************************
-
 
 
 
@@ -50,5 +43,26 @@ public class JobController {
 
     }
     //********************************************************************************
+
+
+
+    //********************************************************************************
+    @GetMapping(value = "")
+    public ResponseEntity<Object>getAllJobs(){
+        return ResponseEntity.ok().body(jobService.getAllJobs());
+    }
+//********************************************************************************
+
+@GetMapping(value="/{id}")
+    public ResponseEntity<Job> getOneJobByID(@PathVariable("id") Long id){
+        return new ResponseEntity<>(jobService.getOneJobByID(id),HttpStatus.OK);
+
+}
+
+
+
+
+
+
 
 }

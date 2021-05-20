@@ -26,7 +26,7 @@ public class OrderController {
     private OrderService orderService;
 
 
-//********************************************************************************
+    //********************************************************************************
     @PostMapping(value = "/create")
     public ResponseEntity<Object> createNewOrder(@RequestBody Order order) {
 
@@ -40,7 +40,7 @@ public class OrderController {
 //********************************************************************************
 
 
-//********************************************************************************
+    //********************************************************************************
     @GetMapping(value = "")
     public ResponseEntity<Object> getAllOrders() {
         return ResponseEntity.ok().body(orderService.getAllOrders());
@@ -48,7 +48,7 @@ public class OrderController {
 //********************************************************************************
 
 
-//********************************************************************************
+    //********************************************************************************
     @GetMapping(value = "/ordersByCustomer/{username}")
     public ResponseEntity<Object> getAllordersByCustomer(@PathVariable("username") String username) {
         List<Order> orders = orderService.getAllOrdersByUser(username);
@@ -57,7 +57,7 @@ public class OrderController {
 //********************************************************************************
 
 
-//********************************************************************************
+    //********************************************************************************
     @GetMapping(value = "/inlog")
     public ResponseEntity<Object> getAllOrdersByInlogNameOnly() {
         String user = ExtractUserName.ExtractUserNameFromJwt();
@@ -67,7 +67,7 @@ public class OrderController {
 //********************************************************************************
 
 
-//********************************************************************************
+    //********************************************************************************
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> getOneOrderByID(@PathVariable("id") Long id) {
         return new ResponseEntity<>(orderService.getOneOrderByID(id), HttpStatus.OK);
@@ -75,7 +75,7 @@ public class OrderController {
 //********************************************************************************
 
 
-//********************************************************************************
+    //********************************************************************************
     @GetMapping(value = "/name/{ordername}")
     public ResponseEntity<Object> getOneOrderByName(@PathVariable("ordername") String ordername) {
         return ResponseEntity.ok().body(orderService.getOneOrderByName(ordername));
@@ -83,7 +83,7 @@ public class OrderController {
 //********************************************************************************
 
 
-//********************************************************************************
+    //********************************************************************************
     @PutMapping(value = "/update/{ordername}")
 
     public ResponseEntity<Object> updateOrder(@PathVariable("ordername") String ordername, @RequestBody Order order) {

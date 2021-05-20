@@ -7,15 +7,12 @@ import nl.lotrac.bv.exceptions.NameExistsException;
 import nl.lotrac.bv.exceptions.NameNotFoundException;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.model.OrderLine;
-import nl.lotrac.bv.model.User;
 import nl.lotrac.bv.repository.OrderLineRepository;
 import nl.lotrac.bv.repository.OrderRepository;
 import nl.lotrac.bv.repository.UserRepository;
 import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 

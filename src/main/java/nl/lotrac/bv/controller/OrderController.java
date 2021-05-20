@@ -49,8 +49,8 @@ public class OrderController {
 
 
     //********************************************************************************
-    @GetMapping(value = "/ordersByCustomer/{username}")
-    public ResponseEntity<Object> getAllordersByCustomer(@PathVariable("username") String username) {
+    @GetMapping(value = "/ordersByUser/{username}")
+    public ResponseEntity<Object> getAllordersByUser(@PathVariable("username") String username) {
         List<Order> orders = orderService.getAllOrdersByUser(username);
         return ResponseEntity.ok().body(orders);
     }

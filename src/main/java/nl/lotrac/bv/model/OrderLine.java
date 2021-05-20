@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "order_lines")
+@Table(name = "orderlines")
 public class OrderLine {
 
 
@@ -42,14 +42,14 @@ public class OrderLine {
 //
 
 
-    //    gedeelte voor job
+//    //    gedeelte voor job
     @ManyToMany
-    @JoinTable(name = "orderline_job",
+    @JoinTable(name = "linktable_orderline_job",
             joinColumns = {@JoinColumn(name = "fk_orderLine")},
             inverseJoinColumns =
                     {@JoinColumn(name = "fk_job")})
 
-    private List<Job>jobs;
+    private List<Job>jobsFromOrderline;
 
 
 }

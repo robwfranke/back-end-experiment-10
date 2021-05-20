@@ -33,9 +33,9 @@ public class Job {
     private String department;
 
 //
-//    @ManyToMany(mappedBy = "jobs")
-    @ManyToMany
-
-    private List<OrderLine> orderlines = new ArrayList<OrderLine>();
+////    @ManyToMany(mappedBy = "jobs")
+    @ManyToMany(mappedBy = "jobsFromOrderline")
+//
+    private List<OrderLine> orderlines;
 
 }

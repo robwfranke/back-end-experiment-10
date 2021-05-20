@@ -59,8 +59,8 @@ public class OrderLineServiceImpl implements OrderLineService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
 
-//        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
-//            throw new NameExistsException("orderLine exists");
+        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
+            throw new NameExistsException("orderLine exists");
 
 
 //    order heeft de velden:

@@ -43,6 +43,9 @@ public class OrderLineServiceImpl implements OrderLineService {
 
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
+        if(order == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
 
         String username=ExtractUserName.ExtractUserNameFromJwt();
         log.debug("!!! username:  " + username);

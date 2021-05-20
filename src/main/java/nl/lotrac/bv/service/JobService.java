@@ -10,6 +10,5 @@ public interface JobService {
     String createNewJob (Job job);
 
 
-
-
+    List<Job> getAllJobs();
 }

@@ -3,6 +3,7 @@ package nl.lotrac.bv.controller;
 import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.service.OrderService;
+import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,8 +59,8 @@ public class OrderController {
 
 //********************************************************************************
     @GetMapping(value = "/inlog")
-    public ResponseEntity<Object> getAllordersByInlogNameOnly() {
-        String user = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+    public ResponseEntity<Object> getAllOrdersByInlogNameOnly() {
+        String user = ExtractUserName.ExtractUserNameFromJwt();
         List<Order> orders = orderService.getAllOrdersByUser(user);
         return ResponseEntity.ok().body(orders);
     }

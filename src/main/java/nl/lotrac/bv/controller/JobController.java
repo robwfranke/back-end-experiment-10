@@ -29,18 +29,26 @@ public class JobController {
 
 
     //********************************************************************************
+    @GetMapping(value = "")
+    public ResponseEntity<Object>getAllJobs(){
+        return ResponseEntity.ok().body(jobService.getAllJobs());
+    }
+//********************************************************************************
+
+
+
+
+    //********************************************************************************
     @PostMapping(value = "/create")
-    public ResponseEntity<Object> createNewJob(@RequestBody Job job) {
+    public ResponseEntity<Job> createNewJob(@RequestBody Job job) {
 
         jobService.createNewJob(job);
-
-
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(job.getJobname()).toUri();
 
         return ResponseEntity.created(location).body(job);
 
     }
-
+    //********************************************************************************
 
 }

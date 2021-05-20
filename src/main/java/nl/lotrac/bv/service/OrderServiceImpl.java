@@ -7,6 +7,7 @@ import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.model.User;
 import nl.lotrac.bv.repository.OrderRepository;
 import nl.lotrac.bv.repository.UserRepository;
+import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String createNewOrder(Order order) {
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
 
+        String username = ExtractUserName.ExtractUserNameFromJwt();
         User user = userRepository.getUserByUsername(username);
 
 
@@ -51,8 +52,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-
-
     @Override
     public List<Order> getAllOrdersByUser(String username) {
         User user = userRepository.getUserByUsername(username);
@@ -60,10 +59,6 @@ public class OrderServiceImpl implements OrderService {
             throw new NameNotFoundException("Name not present");
         return user.getOrders();
     }
-
-
-
-
 
 
     @Override

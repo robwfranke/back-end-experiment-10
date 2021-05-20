@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getAllOrdersByUser(String username) {
         User user = userRepository.getUserByUsername(username);
         if (user == null)
-            throw new NameNotFoundException("Name not present");
+            throw new NameNotFoundException("order not present");
         return user.getOrders();
     }
 

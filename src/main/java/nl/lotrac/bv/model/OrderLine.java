@@ -49,8 +49,7 @@ public class OrderLine {
             inverseJoinColumns =
                     {@JoinColumn(name = "fk_job")})
 
-    private List<Job> jobs =
-            new ArrayList<>();
+    private List<Job>jobs;
 
 
 }

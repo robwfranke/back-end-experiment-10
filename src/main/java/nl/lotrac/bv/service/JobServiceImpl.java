@@ -5,6 +5,8 @@ import nl.lotrac.bv.exceptions.NameExistsException;
 import nl.lotrac.bv.exceptions.NameNotFoundException;
 import nl.lotrac.bv.model.Job;
 //import nl.lotrac.bv.model.Order;
+import nl.lotrac.bv.model.OrderLine;
+import nl.lotrac.bv.model.User;
 import nl.lotrac.bv.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,11 +49,16 @@ public class JobServiceImpl implements JobService {
         } else {
             return job.get();
         }
-
-
-
-
     }
+
+    @Override
+    public List<Job> getAllJobsByJob(String departmentname) {
+//        Job job = jobRepository.getJobByJobname(jobname);
+//        if (job == null)
+//            throw new NameNotFoundException("job not present");
+        return jobRepository.findAllByDepartment(departmentname);
+    }
+
 
 
 }

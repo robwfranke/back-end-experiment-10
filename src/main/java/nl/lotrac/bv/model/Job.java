@@ -32,6 +32,15 @@ public class Job {
     @Column
     private String department;
 
+
+
+//    public  job(){
+//
+//        this.jobname=getJobname();
+//        this.department=getDepartment();
+//    }
+
+
 //
 ////    @ManyToMany(mappedBy = "jobs")
     @JsonIgnore

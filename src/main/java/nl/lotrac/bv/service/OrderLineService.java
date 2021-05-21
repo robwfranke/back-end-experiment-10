@@ -1,5 +1,6 @@
 package nl.lotrac.bv.service;
 
+import nl.lotrac.bv.controller.model.AddJob;
 import nl.lotrac.bv.controller.model.CreateOrderLine;
 import nl.lotrac.bv.model.OrderLine;
 
@@ -12,6 +13,8 @@ public interface OrderLineService {
    public abstract List<OrderLine> getAllOrderLines();
 
    public abstract OrderLine getOneOrderLineByID(Long id);
+
+   public abstract OrderLine addJob (AddJob addJob);
 
 
 

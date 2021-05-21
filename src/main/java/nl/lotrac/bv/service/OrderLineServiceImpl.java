@@ -2,14 +2,18 @@ package nl.lotrac.bv.service;
 
 
 import lombok.extern.slf4j.Slf4j;
+import nl.lotrac.bv.controller.model.AddJob;
 import nl.lotrac.bv.controller.model.CreateOrderLine;
 import nl.lotrac.bv.exceptions.NameExistsException;
 import nl.lotrac.bv.exceptions.NameNotFoundException;
+import nl.lotrac.bv.model.Job;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.model.OrderLine;
+import nl.lotrac.bv.repository.JobRepository;
 import nl.lotrac.bv.repository.OrderLineRepository;
 import nl.lotrac.bv.repository.OrderRepository;
 import nl.lotrac.bv.repository.UserRepository;
+
 import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,10 +34,31 @@ public class OrderLineServiceImpl implements OrderLineService {
     private OrderRepository orderRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private JobRepository jobRepository;
+//       newOrderLine.setOrder(order);
 
 
     @Override
+
+    public OrderLine addJob(AddJob addJob) {
+
+        OrderLine orderline = orderLineRepository.getOrderLineByItemname(addJob.getOrderLineName());
+        Job job = jobRepository.getJobByJobname(addJob.getJobName());
+
+
+
+        if (orderline.getJobsFromOrderline() == null) {
+            List<Job> jobs = List.of(job);
+            orderline.setJobsFromOrderline(jobs);
+        } else {
+            orderline.getJobsFromOrderline().add(job);
+        }
+
+
+        return orderLineRepository.save(orderline);
+
+    }
+
 
     public OrderLine createNewOrderLine(CreateOrderLine createOrderLine) {
         log.debug(createOrderLine.toString());
@@ -41,11 +66,11 @@ public class OrderLineServiceImpl implements OrderLineService {
         Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
 
 //        check of deze order bestaat
-        if(order == null)
+        if (order == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
 
-        String username=ExtractUserName.ExtractUserNameFromJwt();
+        String username = ExtractUserName.ExtractUserNameFromJwt();
         log.debug("!!! username:  " + username);
 
 
@@ -54,7 +79,7 @@ public class OrderLineServiceImpl implements OrderLineService {
 
 // via de methode order.getUser kun je met getUsername() haal je de username op die bij deze order hoort.
 //        check of deze order bij de user hoort
-        if(!order.getUser().getUsername().equals(username))
+        if (!order.getUser().getUsername().equals(username))
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
 //        check of orderline bij deze user bestaat
@@ -80,14 +105,13 @@ public class OrderLineServiceImpl implements OrderLineService {
         OrderLine newOrderLine = new OrderLine();
 
 
-
         newOrderLine.setItemname(createOrderLine.getItemName());
         newOrderLine.setQuantity(createOrderLine.getQuantity());
         log.debug("newOrderline ItemName: " + newOrderLine.getItemname());
         log.debug("newOrderline Quantity: " + newOrderLine.getQuantity());
 
 
-//  wanneer je nu de order teruggeeft dmv de setter weet JPA via @ManyToOne dat hij dat in de foreignKeymoet zetten
+//  wanneer je nu de order teruggeeft dmv de setter weet JPA via @ManyToOne dat hij dat in de foreign Key moet zetten
         newOrderLine.setOrder(order);
 
 

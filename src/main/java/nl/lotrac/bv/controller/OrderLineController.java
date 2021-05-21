@@ -1,6 +1,7 @@
 package nl.lotrac.bv.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.lotrac.bv.controller.model.AddJob;
 import nl.lotrac.bv.controller.model.CreateOrderLine;
 import nl.lotrac.bv.model.OrderLine;
 import nl.lotrac.bv.repository.OrderRepository;
@@ -30,20 +31,17 @@ public class OrderLineController {
     @Autowired
     private OrderLineService orderLineService;
 
-    @PostMapping(value="/create")
+    @PostMapping(value = "/create")
 
-    public ResponseEntity<OrderLine>createNewOrderLine(@RequestBody CreateOrderLine createOrderLine ){
+    public ResponseEntity<OrderLine> createNewOrderLine(@RequestBody CreateOrderLine createOrderLine) {
         log.debug(createOrderLine.toString());
-OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
+        OrderLine orderLine = orderLineService.createNewOrderLine(createOrderLine);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
                 .buildAndExpand(orderLine.getItemname()).toUri();
 
         return ResponseEntity.created(location).body(orderLine);
     }
-
-
-
 
 
     @GetMapping(value = "")
@@ -53,10 +51,9 @@ OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OrderLine>getOneOrderLineByID(@PathVariable("id")Long id){
-        return new ResponseEntity<>(orderLineService.getOneOrderLineByID(id),HttpStatus.OK) ;
+    public ResponseEntity<OrderLine> getOneOrderLineByID(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(orderLineService.getOneOrderLineByID(id), HttpStatus.OK);
     }
-
 
 
 //    In repository staat getOrderLineByKoekoek
@@ -66,8 +63,16 @@ OrderLine orderLine= orderLineService.createNewOrderLine(createOrderLine);
         return ResponseEntity.ok().body(orderLineService.getOneOrderLineByName(itemname));
     }
 
+    @PostMapping(value = "/addJob")
+    public ResponseEntity<OrderLine>addJob(@RequestBody AddJob addJob){
+        log.debug(addJob.getOrderLineName());
+       log.debug(addJob.getJobName());
+       log.debug(addJob.getDepartment());
+
+       return ResponseEntity.ok().body(orderLineService.addJob(addJob));
 
 
+    }
 
 
 }

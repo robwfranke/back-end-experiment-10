@@ -15,7 +15,7 @@ import lombok.ToString;
 
 
 public class
-CreateOrderLine {
+CreateItem {
     private String orderName;
 
     private String itemName;

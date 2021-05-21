@@ -18,8 +18,10 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "orderlines")
-public class OrderLine {
+@Table(name = "items")
+
+
+public class Item {
 
 
     @Id
@@ -41,22 +43,15 @@ public class OrderLine {
 //
 
 
-//    public OrderLine(String itemname, int quantity) {
-//        this.itemname = itemname;
-//        this.quantity = quantity;
-//    }
-
-
-
 
     //    //    gedeelte voor job
     @ManyToMany
-    @JoinTable(name = "linktable_orderline_job",
-            joinColumns = {@JoinColumn(name = "fk_orderLine")},
+    @JoinTable(name = "linktable_item_job",
+            joinColumns = {@JoinColumn(name = "fk_item")},
             inverseJoinColumns =
                     {@JoinColumn(name = "fk_job")})
 
-    private List<Job> jobsFromOrderline;
+    private List<Job> jobsFromItem;
 
 
 }

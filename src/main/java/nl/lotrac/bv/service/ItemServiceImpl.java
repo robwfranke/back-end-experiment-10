@@ -3,16 +3,15 @@ package nl.lotrac.bv.service;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.lotrac.bv.controller.model.AddJob;
-import nl.lotrac.bv.controller.model.CreateOrderLine;
+import nl.lotrac.bv.controller.model.CreateItem;
 import nl.lotrac.bv.exceptions.NameExistsException;
 import nl.lotrac.bv.exceptions.NameNotFoundException;
 import nl.lotrac.bv.model.Job;
 import nl.lotrac.bv.model.Order;
-import nl.lotrac.bv.model.OrderLine;
+import nl.lotrac.bv.model.Item;
 import nl.lotrac.bv.repository.JobRepository;
-import nl.lotrac.bv.repository.OrderLineRepository;
+import nl.lotrac.bv.repository.ItemRepository;
 import nl.lotrac.bv.repository.OrderRepository;
-import nl.lotrac.bv.repository.UserRepository;
 
 import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,45 +24,44 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class OrderLineServiceImpl implements OrderLineService {
+public class ItemServiceImpl implements ItemService {
 
     @Autowired
-    private OrderLineRepository orderLineRepository;
+    private ItemRepository itemRepository;
 
     @Autowired
     private OrderRepository orderRepository;
 
     @Autowired
     private JobRepository jobRepository;
-//       newOrderLine.setOrder(order);
 
 
     @Override
 
-    public OrderLine addJob(AddJob addJob) {
+    public Item addJob(AddJob addJob) {
 
-        OrderLine orderline = orderLineRepository.getOrderLineByItemname(addJob.getOrderLineName());
+        Item Item = itemRepository.getOrderLineByItemname(addJob.getOrderLineName());
         Job job = jobRepository.getJobByJobname(addJob.getJobName());
 
 
 
-        if (orderline.getJobsFromOrderline() == null) {
+        if (Item.getJobsFromItem() == null) {
             List<Job> jobs = List.of(job);
-            orderline.setJobsFromOrderline(jobs);
+            Item.setJobsFromItem(jobs);
         } else {
-            orderline.getJobsFromOrderline().add(job);
+            Item.getJobsFromItem().add(job);
         }
 
 
-        return orderLineRepository.save(orderline);
+        return itemRepository.save(Item);
 
     }
 
 
-    public OrderLine createNewOrderLine(CreateOrderLine createOrderLine) {
-        log.debug(createOrderLine.toString());
+    public Item createNewItem(CreateItem createItem) {
+        log.debug(createItem.toString());
 
-        Order order = orderRepository.getOrderByOrdername(createOrderLine.getOrderName());
+        Order order = orderRepository.getOrderByOrdername(createItem.getOrderName());
 
 //        check of deze order bestaat
         if (order == null)
@@ -82,10 +80,10 @@ public class OrderLineServiceImpl implements OrderLineService {
         if (!order.getUser().getUsername().equals(username))
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
-//        check of orderline bij deze user bestaat
+//        check of Item bij deze user bestaat
 
-        if (orderLineRepository.getOrderLineByItemname(createOrderLine.getItemName()) != null)
-            throw new NameExistsException("orderLine exists");
+        if (itemRepository.getOrderLineByItemname(createItem.getItemName()) != null)
+            throw new NameExistsException("Item exists");
 
 
 //    order heeft de velden:
@@ -93,7 +91,7 @@ public class OrderLineServiceImpl implements OrderLineService {
 //      private String ordername;
 //      private String status;
 //
-//     hier is dus een copy uit de repositoryOrder gemaakt mbv de createOrdeLine, CreateOrderLine createOrderLine
+//     hier is dus een copy uit de repositoryOrder gemaakt mbv de createOrdeLine, CreateItem createItem
 //
 //        log.debug("ordername:" + order.getOrdername());
 
@@ -102,51 +100,51 @@ public class OrderLineServiceImpl implements OrderLineService {
         log.debug("ordername: " + order.getOrdername());
         log.debug("orderStatus: " + order.getStatus());
 
-        OrderLine newOrderLine = new OrderLine();
+        Item newItem = new Item();
 
 
-        newOrderLine.setItemname(createOrderLine.getItemName());
-        newOrderLine.setQuantity(createOrderLine.getQuantity());
-        log.debug("newOrderline ItemName: " + newOrderLine.getItemname());
-        log.debug("newOrderline Quantity: " + newOrderLine.getQuantity());
+        newItem.setItemname(createItem.getItemName());
+        newItem.setQuantity(createItem.getQuantity());
+        log.debug("newOrderline ItemName: " + newItem.getItemname());
+        log.debug("newOrderline Quantity: " + newItem.getQuantity());
 
 
 //  wanneer je nu de order teruggeeft dmv de setter weet JPA via @ManyToOne dat hij dat in de foreign Key moet zetten
-        newOrderLine.setOrder(order);
+        newItem.setOrder(order);
 
 
 // pas na save wordt een nieuwe id aangemaakt
-        return orderLineRepository.save(newOrderLine);
+        return itemRepository.save(newItem);
     }
 
 
     @Override
-    public List<OrderLine> getAllOrderLines() {
+    public List<Item> getAllItems() {
 
-        return orderLineRepository.findAll();
+        return itemRepository.findAll();
     }
 
     @Override
-    public OrderLine getOneOrderLineByID(Long id) {
+    public Item getOneItemByID(Long id) {
 
-        Optional<OrderLine> orderLine = orderLineRepository.findById(id);
-        if (orderLine.isEmpty()) {
-            throw new NameNotFoundException("orderLine does not exists");
+        Optional<Item> Item = itemRepository.findById(id);
+        if (Item.isEmpty()) {
+            throw new NameNotFoundException("Item does not exists");
         } else {
-            return orderLine.get();
+            return Item.get();
         }
     }
 
 
     //    In repository staat getOrderLineByItemName
     @Override
-    public OrderLine getOneOrderLineByName(String itemname) {
+    public Item getOneItemByName(String itemname) {
 
-        OrderLine orderLine = orderLineRepository.getOrderLineByItemname(itemname);
-        if (orderLine == null)
-            throw new NameNotFoundException("orderLine does not exists");
+        Item item = itemRepository.getOrderLineByItemname(itemname);
+        if (item == null)
+            throw new NameNotFoundException("item does not exists");
 
-        return orderLine;
+        return item;
     }
 
 

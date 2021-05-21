@@ -1,5 +1,6 @@
 package nl.lotrac.bv.repository;
 
+import nl.lotrac.bv.model.Item;
 import nl.lotrac.bv.model.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -2,10 +2,10 @@ package nl.lotrac.bv.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.lotrac.bv.controller.model.AddJob;
-import nl.lotrac.bv.controller.model.CreateOrderLine;
-import nl.lotrac.bv.model.OrderLine;
+import nl.lotrac.bv.controller.model.CreateItem;
+import nl.lotrac.bv.model.Item;
 import nl.lotrac.bv.repository.OrderRepository;
-import nl.lotrac.bv.service.OrderLineService;
+import nl.lotrac.bv.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.net.URI;
 
 
 @Slf4j
-public class OrderLineController {
+public class ItemController {
 
 
     @Autowired
@@ -29,30 +29,30 @@ public class OrderLineController {
 
 
     @Autowired
-    private OrderLineService orderLineService;
+    private ItemService itemService;
 
     @PostMapping(value = "/create")
 
-    public ResponseEntity<OrderLine> createNewOrderLine(@RequestBody CreateOrderLine createOrderLine) {
-        log.debug(createOrderLine.toString());
-        OrderLine orderLine = orderLineService.createNewOrderLine(createOrderLine);
+    public ResponseEntity<Item> createNewOrderLine(@RequestBody CreateItem createItem) {
+        log.debug(createItem.toString());
+        Item item = itemService.createNewItem(createItem);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{create}")
-                .buildAndExpand(orderLine.getItemname()).toUri();
+                .buildAndExpand(item.getItemname()).toUri();
 
-        return ResponseEntity.created(location).body(orderLine);
+        return ResponseEntity.created(location).body(item);
     }
 
 
     @GetMapping(value = "")
     public ResponseEntity<Object> getAllOrderLines() {
 
-        return ResponseEntity.ok().body(orderLineService.getAllOrderLines());
+        return ResponseEntity.ok().body(itemService.getAllItems());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OrderLine> getOneOrderLineByID(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(orderLineService.getOneOrderLineByID(id), HttpStatus.OK);
+    public ResponseEntity<Item> getOneOrderLineByID(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(itemService.getOneItemByID(id), HttpStatus.OK);
     }
 
 
@@ -60,16 +60,16 @@ public class OrderLineController {
 
     @GetMapping(value = "/name/{ordername}")
     public ResponseEntity<Object> getOneOrderLineByName(@PathVariable("ordername") String itemname) {
-        return ResponseEntity.ok().body(orderLineService.getOneOrderLineByName(itemname));
+        return ResponseEntity.ok().body(itemService.getOneItemByName(itemname));
     }
 
     @PostMapping(value = "/addJob")
-    public ResponseEntity<OrderLine>addJob(@RequestBody AddJob addJob){
+    public ResponseEntity<Item>addJob(@RequestBody AddJob addJob){
         log.debug(addJob.getOrderLineName());
        log.debug(addJob.getJobName());
        log.debug(addJob.getDepartment());
 
-       return ResponseEntity.ok().body(orderLineService.addJob(addJob));
+       return ResponseEntity.ok().body(itemService.addJob(addJob));
 
 
     }

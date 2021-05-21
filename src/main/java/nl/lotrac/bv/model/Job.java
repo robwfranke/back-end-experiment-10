@@ -8,7 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -46,6 +45,6 @@ public class Job {
     @JsonIgnore
     @ManyToMany(mappedBy = "jobsFromOrderline")
 //
-    private List<OrderLine> orderlines;
+    private List<Item> orderlines;
 
 }

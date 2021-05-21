@@ -43,7 +43,7 @@ public class Order {
 
     @OneToMany
     @JoinColumn(name="fk_order")
-    private List<OrderLine>orderLines;
+    private List<Item> items;
 
 }
 

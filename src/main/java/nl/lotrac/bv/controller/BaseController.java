@@ -20,24 +20,6 @@ public class BaseController {
     private CustomerService customerService;
 
 
-    @GetMapping(value = "/")
-    public String hello() {
-        return "Hello World";
-    }
-
-
-
-    @GetMapping(value = "/test/{name}")
-    public String hello(@RequestParam(name="name")String name)
-
-    {
-        System.out.println("stop");
-        System.out.println(name);
-
-
-        return "Hello World";
-    }
-
 
     @PostMapping(value="/create")
    public ResponseEntity<User>createNewCustomer(@RequestBody User user){
@@ -46,9 +28,8 @@ public class BaseController {
 
         User newCustomername= customerService.createNewCustomer(user);
 
-//        MessageFrontEnd message = new MessageFrontEnd("Customer: " + newCustomername+ "  created");
 
-//        hier adres op geven waar je customer kunt opvragen
+//        hier adres op geven waar je customer of user kunt opvragen
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/users/name/" + newCustomername.getUsername())
                 .buildAndExpand(newCustomername).toUri();
 

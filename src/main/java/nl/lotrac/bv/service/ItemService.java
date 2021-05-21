@@ -18,6 +18,8 @@ public interface ItemService {
 
 
 
+
+
    //    In repository staat getOrderLineByItemName
    public abstract Item getOneItemByName(String itemname);
 

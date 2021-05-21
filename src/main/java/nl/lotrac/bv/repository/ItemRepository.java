@@ -7,6 +7,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
 
 
-   Item getOrderLineByItemname(String itemname);
+   Item getItemByItemname(String itemname);
+
+
 
 }

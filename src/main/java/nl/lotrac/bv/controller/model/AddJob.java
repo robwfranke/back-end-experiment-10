@@ -16,7 +16,7 @@ import lombok.ToString;
 
 public class
 AddJob {
-    private String orderLineName;
+    private String itemName;
 
     private String jobName;
 

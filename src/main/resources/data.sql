@@ -34,10 +34,10 @@ INSERT INTO orders (ordername, status, fk_user) VALUES ('order_54', 'open','rob'
 
 
 
-INSERT INTO orderlines (itemname, quantity, fk_order) VALUES ('1001',13,2);
-INSERT INTO orderlines (itemname, quantity, fk_order) VALUES ('2001', 1,2);
-INSERT INTO orderlines (itemname, quantity, fk_order) VALUES ('3001', 3,2);
-INSERT INTO orderlines (itemname, quantity, fk_order) VALUES ('4001', 6,1);
+INSERT INTO items (itemname, quantity, fk_order) VALUES ('1001',13,2);
+INSERT INTO items (itemname, quantity, fk_order) VALUES ('2001', 1,2);
+INSERT INTO items (itemname, quantity, fk_order) VALUES ('3001', 3,2);
+INSERT INTO items (itemname, quantity, fk_order) VALUES ('4001', 6,1);
 --
 --
 INSERT INTO jobs (jobname, department) VALUES ('voordraaien', 'draai afdeling');
@@ -47,7 +47,7 @@ INSERT INTO jobs (jobname, department) VALUES ('nafrezen', 'frees afdeling');
 INSERT INTO jobs (jobname, department) VALUES ('slijpen', 'slijp afdeling');
 
 
-INSERT INTO linktable_orderline_job (fk_order_line, fk_job) VALUES ('1', '1');
-INSERT INTO linktable_orderline_job (fk_order_line, fk_job) VALUES ('1', '2');
-INSERT INTO linktable_orderline_job (fk_order_line, fk_job) VALUES ('1', '3');
-INSERT INTO linktable_orderline_job (fk_order_line, fk_job) VALUES ('1', '4');
+INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '1');
+INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '2');
+INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '3');
+INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '4');

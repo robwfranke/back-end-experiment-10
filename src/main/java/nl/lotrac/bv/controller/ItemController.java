@@ -17,7 +17,7 @@ import java.net.URI;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(value = "/orderlines")
+@RequestMapping(value = "/items")
 
 
 @Slf4j
@@ -58,14 +58,14 @@ public class ItemController {
 
 //    In repository staat getOrderLineByKoekoek
 
-    @GetMapping(value = "/name/{ordername}")
-    public ResponseEntity<Object> getOneOrderLineByName(@PathVariable("ordername") String itemname) {
+    @GetMapping(value = "/name/{itemname}")
+    public ResponseEntity<Object> getOneOrderLineByName(@PathVariable("itemname") String itemname) {
         return ResponseEntity.ok().body(itemService.getOneItemByName(itemname));
     }
 
     @PostMapping(value = "/addJob")
     public ResponseEntity<Item>addJob(@RequestBody AddJob addJob){
-        log.debug(addJob.getOrderLineName());
+        log.debug(addJob.getItemName());
        log.debug(addJob.getJobName());
        log.debug(addJob.getDepartment());
 

@@ -40,20 +40,34 @@ public class ItemServiceImpl implements ItemService {
 
     public Item addJob(AddJob addJob) {
 
-        Item Item = itemRepository.getOrderLineByItemname(addJob.getOrderLineName());
+        Item item = itemRepository.getItemByItemname(addJob.getItemName());
         Job job = jobRepository.getJobByJobname(addJob.getJobName());
 
 
 
-        if (Item.getJobsFromItem() == null) {
-            List<Job> jobs = List.of(job);
-            Item.setJobsFromItem(jobs);
-        } else {
-            Item.getJobsFromItem().add(job);
+
+//check of item bestaat
+        if (item == null) {
+            throw new NameNotFoundException("Item does not exists");
+        }
+//check of job bestaat
+
+        if (job == null) {
+            throw new NameNotFoundException("job does not exists");
         }
 
 
-        return itemRepository.save(Item);
+
+
+        if (item.getJobsFromItem() == null) {
+            List<Job> jobs = List.of(job);
+            item.setJobsFromItem(jobs);
+        } else {
+            item.getJobsFromItem().add(job);
+        }
+
+
+        return itemRepository.save(item);
 
     }
 
@@ -82,7 +96,7 @@ public class ItemServiceImpl implements ItemService {
 
 //        check of Item bij deze user bestaat
 
-        if (itemRepository.getOrderLineByItemname(createItem.getItemName()) != null)
+        if (itemRepository.getItemByItemname(createItem.getItemName()) != null)
             throw new NameExistsException("Item exists");
 
 
@@ -140,7 +154,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item getOneItemByName(String itemname) {
 
-        Item item = itemRepository.getOrderLineByItemname(itemname);
+        Item item = itemRepository.getItemByItemname(itemname);
         if (item == null)
             throw new NameNotFoundException("item does not exists");
 

@@ -33,18 +33,9 @@ public class Job {
 
 
 
-//    public  job(){
-//
-//        this.jobname=getJobname();
-//        this.department=getDepartment();
-//    }
-
-
-//
-////    @ManyToMany(mappedBy = "jobs")
     @JsonIgnore
-    @ManyToMany(mappedBy = "jobsFromOrderline")
+    @ManyToMany(mappedBy = "jobsFromItem")
 //
-    private List<Item> orderlines;
+    private List<Item> items;
 
 }

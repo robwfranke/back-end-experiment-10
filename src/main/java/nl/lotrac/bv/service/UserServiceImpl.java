@@ -5,7 +5,6 @@ import nl.lotrac.bv.exceptions.*;
 import nl.lotrac.bv.model.Authority;
 import nl.lotrac.bv.model.Role;
 import nl.lotrac.bv.model.User;
-import nl.lotrac.bv.utils.RandomStringGenerator;
 
 import nl.lotrac.bv.repository.UserRepository;
 

@@ -61,3 +61,10 @@ INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '1');
 INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '2');
 INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '3');
 INSERT INTO linktable_item_job (fk_item, fk_job) VALUES ('1', '4');
+
+
+
+INSERT INTO address (street,city,postalcode,telnumber,fk1_user) VALUES ('straat 1', 'city 1','PC1111','tel1111111','customer1')
+INSERT INTO address (street,city,postalcode,telnumber,fk1_user) VALUES ('straat 2', 'city 2','PC2222','tel2222222','customer2')
+-- INSERT INTO address (user_id,street,city,postalcode,telnumber) VALUES (3,'straat 3', 'city 3','PC3333','tel3333333')
+-- INSERT INTO address (user_id,street,city,postalcode,telnumber) VALUES (4,'straat 4', 'city 4','PC4444','tel4444444')

@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "address")
 public class Address {
 
 
@@ -40,7 +40,11 @@ public class Address {
     @Column(length = 255)
     private String telnumber;
 
-//    @JsonIgnore
-//    @OneToOne
-//    private User user;
+//@JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="fk1_user")
+private User user;
+
+
+
 }

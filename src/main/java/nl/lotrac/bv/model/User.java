@@ -37,8 +37,14 @@ public class User {
     @Column
     private String email;
 
-    @OneToOne
-    private Address address;
+
+
+
+    @OneToMany
+    @JoinColumn(name = "fk1_user")
+    private List<Address> addresses;
+
+
 
 
     @OneToMany

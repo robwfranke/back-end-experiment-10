@@ -30,9 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 
         System.out.println("CustomerService Impl create newCustomer");
 
-//        if (customerRepository.getCustomerByCustomername(customer.getCustomername()) != null)
-//            throw new NameExistsException("customer exists");
-
         return userService.getUser(newUser);
 
     }

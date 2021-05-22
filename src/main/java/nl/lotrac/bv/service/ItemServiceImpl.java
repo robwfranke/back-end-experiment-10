@@ -105,9 +105,8 @@ public class ItemServiceImpl implements ItemService {
 //      private String ordername;
 //      private String status;
 //
-//     hier is dus een copy uit de repositoryOrder gemaakt mbv de createOrdeLine, CreateItem createItem
+//     hier is dus een copy uit de repositoryOrder gemaakt mbv de createItem, CreateItem createItem
 //
-//        log.debug("ordername:" + order.getOrdername());
 
 
         log.debug("order Id: " + String.valueOf(order.getId()));

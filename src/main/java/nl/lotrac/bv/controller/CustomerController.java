@@ -17,23 +17,4 @@ public class CustomerController {
     private CustomerService customerService;
 
 
-//    @GetMapping(value = "")
-//    public ResponseEntity<Object>getAllCustomers(){
-//        return ResponseEntity.ok().body(customerService.getAllCustomers());
-//    }
-//
-//
-//
-//
-//    @GetMapping(value = "/{id}")
-//    public ResponseEntity<Customer>getOneCustomerByID(@PathVariable("id")Long id){
-//      return new ResponseEntity<>(customerService.getOneCustomerByID(id),HttpStatus.OK) ;
-//}
-//
-//    @GetMapping(value = "/name/{customername}")
-//    public ResponseEntity<Object> getOneCustomerByName(@PathVariable("customername") String customername) {
-//        return ResponseEntity.ok().body(customerService.getOneCustomerByName(customername));
-//    }
-
-
 }

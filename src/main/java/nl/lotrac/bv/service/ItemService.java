@@ -16,12 +16,6 @@ public interface ItemService {
 
    public abstract Item addJob (AddJob addJob);
 
-
-
-
-
-   //    In repository staat getOrderLineByItemName
+   //    In repository staat getItemByItemName
    public abstract Item getOneItemByName(String itemname);
-
-
 }

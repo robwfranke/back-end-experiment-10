@@ -35,12 +35,12 @@ public class Address {
     private String city;
 
     @Column(length = 255)
-    private String postal_code;
+    private String postalcode;
 
     @Column(length = 255)
-    private String tel_number;
+    private String telnumber;
 
-    @JsonIgnore
-    @OneToOne
-    private User user;
+//    @JsonIgnore
+//    @OneToOne
+//    private User user;
 }

@@ -33,7 +33,7 @@ public class ItemController {
 
     @PostMapping(value = "/create")
 
-    public ResponseEntity<Item> createNewOrderLine(@RequestBody CreateItem createItem) {
+    public ResponseEntity<Item> createNewItem(@RequestBody CreateItem createItem) {
         log.debug(createItem.toString());
         Item item = itemService.createNewItem(createItem);
 
@@ -45,13 +45,13 @@ public class ItemController {
 
 
     @GetMapping(value = "")
-    public ResponseEntity<Object> getAllOrderLines() {
+    public ResponseEntity<Object> getAllItems() {
 
         return ResponseEntity.ok().body(itemService.getAllItems());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Item> getOneOrderLineByID(@PathVariable("id") Long id) {
+    public ResponseEntity<Item> getOneItemByID(@PathVariable("id") Long id) {
         return new ResponseEntity<>(itemService.getOneItemByID(id), HttpStatus.OK);
     }
 
@@ -59,7 +59,7 @@ public class ItemController {
 //    In repository staat getOrderLineByKoekoek
 
     @GetMapping(value = "/name/{itemname}")
-    public ResponseEntity<Object> getOneOrderLineByName(@PathVariable("itemname") String itemname) {
+    public ResponseEntity<Object> getItemByName(@PathVariable("itemname") String itemname) {
         return ResponseEntity.ok().body(itemService.getOneItemByName(itemname));
     }
 

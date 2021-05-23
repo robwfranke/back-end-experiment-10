@@ -62,7 +62,12 @@ public class ItemServiceImpl implements ItemService {
         if (item.getJobsFromItem() == null) {
             List<Job> jobs = List.of(job);
             item.setJobsFromItem(jobs);
+        } else if( item.getJobsFromItem().contains(job)){
+
+            throw new NameNotFoundException("job does exists");
+
         } else {
+
             item.getJobsFromItem().add(job);
         }
 

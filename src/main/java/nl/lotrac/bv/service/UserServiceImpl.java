@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         Address address = new Address();
 
         newUser.setUsername(createUserWithAddress.getUsername());
-        newUser.setPassword(createUserWithAddress.getPassword());
+        newUser.setPassword(passwordEncoder.encode(createUserWithAddress.getPassword()));
         newUser.setEnabled(true);
 
         log.debug("newUser" + newUser.toString());
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
         Address newAddress = addressRepository.save(address);
         newAddress.setUser(user);
-        newUser.setAddresses(newAddress);
+//        newUser.setAddresses(newAddress);
 
 
 

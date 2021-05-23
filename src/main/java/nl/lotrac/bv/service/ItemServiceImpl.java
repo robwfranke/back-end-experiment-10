@@ -37,7 +37,6 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-
     public Item addJob(AddJob addJob) {
 
         Item item = itemRepository.getItemByItemname(addJob.getItemName());
@@ -77,6 +76,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
 
+//    23/5 19:39 @Override toegevoegd
+@Override
     public Item createNewItem(CreateItem createItem) {
         log.debug(createItem.toString());
 

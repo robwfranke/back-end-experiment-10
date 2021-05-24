@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Slf4j
 @Service
@@ -80,11 +82,20 @@ public class CustomerServiceImpl implements CustomerService {
 
         log.debug("newAddress:  " + newAddress.toString());
 
+
+//
+
         addressRepository.save(newAddress);
+        newUser.setAddresses(List.of(newAddress));
+
         userRepository.save(newUser);
         userService.addAuthority(realName, Role.CUSTOMER);
+//        newAddress.setUser(newUser);
 
 //        en nu nog de foreignkey
+
+//        newUser.setAddresses(newAddress.getUser().getAddresses());
+
 
         return (newUser);
     }

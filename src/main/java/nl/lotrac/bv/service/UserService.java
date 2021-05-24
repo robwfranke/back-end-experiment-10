@@ -1,6 +1,6 @@
 package nl.lotrac.bv.service;
 
-import nl.lotrac.bv.controller.model.CreateUserWithAddress;
+import nl.lotrac.bv.controller.model.CreateCustomerWithAddress;
 import nl.lotrac.bv.model.Authority;
 import nl.lotrac.bv.model.Role;
 import nl.lotrac.bv.model.User;
@@ -13,7 +13,6 @@ import java.util.Set;
 public interface UserService {
 
 
-    User createUserWithAddress(CreateUserWithAddress user);
 
     public abstract String createUser(User user);
 

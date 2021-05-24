@@ -1,7 +1,6 @@
 package nl.lotrac.bv.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.lotrac.bv.controller.model.CreateUserWithAddress;
 import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.Role;
 import nl.lotrac.bv.model.User;
@@ -54,21 +53,6 @@ public class UserController {
         return ResponseEntity.created(location).body(messageFrontEnd);
     }
 
-
-//    new endpoint om user te maken
-
-    @PostMapping(value = "/createUserWithAddress")
-
-    public ResponseEntity<User> createUserWithAddress(@RequestBody CreateUserWithAddress createUserWithAddress) {
-        log.debug("UserController, /createUserWithAddress:  "+createUserWithAddress.toString());
-        User user = userService.createUserWithAddress(createUserWithAddress);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{createUserWithAddress}")
-                .buildAndExpand(user.getUsername()).toUri();
-
-
-        return ResponseEntity.created(location).body(user);
-    }
 
 
     @PutMapping(value = "/{username}")

@@ -17,7 +17,7 @@ import javax.persistence.*;
 @ToString
 
 @Entity
-@Table(name = "FILES")
+@Table(name = "files")
 public class FileEntity {
 
 

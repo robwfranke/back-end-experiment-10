@@ -1,12 +1,7 @@
 package nl.lotrac.bv.repository;
 
-import nl.lotrac.bv.model.Address;
+import nl.lotrac.bv.model.FileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FileRepository extends JpaRepository <Address, Long >{
-
-
-
-
-
+public interface FileRepository extends JpaRepository<FileEntity, String> {
 }

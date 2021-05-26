@@ -1,24 +1,27 @@
 package nl.lotrac.bv.service;
 
-import lombok.extern.slf4j.Slf4j;
-import nl.lotrac.bv.model.FileEntity;
-import nl.lotrac.bv.repository.FileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import nl.lotrac.bv.model.FileEntity;
+import nl.lotrac.bv.repository.FileRepository;
+
+
+
+
+
+
+
+
 @Service
-public class FileService{
+public class FileService {
 
-
-    @Autowired
-    private FileRepository fileRepository;
+    private final FileRepository fileRepository;
 
     @Autowired
     public FileService(FileRepository fileRepository) {
@@ -42,5 +45,4 @@ public class FileService{
     public List<FileEntity> getAllFiles() {
         return fileRepository.findAll();
     }
-
 }

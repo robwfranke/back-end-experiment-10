@@ -1,15 +1,12 @@
 package nl.lotrac.bv.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.service.OrderService;
 import nl.lotrac.bv.utils.ExtractUserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

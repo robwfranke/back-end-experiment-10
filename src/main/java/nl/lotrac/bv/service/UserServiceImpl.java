@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String username) {
-        System.out.println("UserServiceImpl getUser");
+        log.debug("UserServiceImpl, getUser");
         User user = userRepository.getUserByUsername(username);
         return user;
     }

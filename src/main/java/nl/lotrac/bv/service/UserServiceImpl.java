@@ -38,51 +38,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-//    @Override
-//    public User createUserWithAddress(CreateCustomerWithAddress createCustomerWithAddress) {
-//
-//        log.debug("UserServiceImpl createCustomerWithAddress " + createCustomerWithAddress.toString());
-//
-//        if (userRepository.existsById(createCustomerWithAddress.getUsername()))
-//            throw new NameExistsException(createCustomerWithAddress.getUsername() + "  exists!!");
-//
-////        test werkt goed.
-//        User user = userRepository.getUserByUsername(createCustomerWithAddress.getUsername());
-//
-//
-//        log.debug("user bestaat nog niet");
-//
-//
-//        log.debug("username" + createCustomerWithAddress.getUsername());
-//        log.debug("Password" + createCustomerWithAddress.getPassword());
-////        log.debug(""+createCustomerWithAddress.get);
-//        log.debug("street" + createCustomerWithAddress.getStreet());
-//
-////        TOT HIER GOED
-//
-//
-//        User newUser = new User();
-//        Address address = new Address();
-//
-//        newUser.setUsername(createCustomerWithAddress.getUsername());
-//        newUser.setPassword(passwordEncoder.encode(createCustomerWithAddress.getPassword()));
-//        newUser.setEnabled(true);
-//
-//        log.debug("newUser" + newUser.toString());
-//
-//        address.setStreet(createCustomerWithAddress.getStreet());
-//
-//        log.debug("newAddress:  " + address.toString());
-//
-//        Address newAddress = addressRepository.save(address);
-//        newAddress.setUser(user);
-////        newUser.setAddresses(newAddress);
-//
-//
-//
-//        return userRepository.save(newUser);
-//    }
-
 
     @Override
     public String createUser(User user) {
@@ -96,9 +51,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(String username, User newUser) {
+
+        log.debug("updateUser   newUser "+newUser);
         if (!userRepository.existsById(username)) throw new NameNotFoundException("user does not exists");
         User user = userRepository.findById(username).get();
-//        user.setPassword(newUser.getPassword());
         user.setEmail(newUser.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

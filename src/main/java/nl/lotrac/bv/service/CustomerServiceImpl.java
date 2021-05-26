@@ -21,7 +21,6 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -48,68 +47,40 @@ public class CustomerServiceImpl implements CustomerService {
         if (userRepository.existsById(createCustomerWithAddress.getUsername()))
             throw new NameExistsException(createCustomerWithAddress.getUsername() + "  exists!!");
 
-        User user = userRepository.getUserByUsername(createCustomerWithAddress.getUsername());
-
-
-        log.debug("user bestaat nog niet");
-
-
-        log.debug("username:   " + createCustomerWithAddress.getUsername());
-        log.debug("Password:   " + createCustomerWithAddress.getPassword());
-//        log.debug(""+createCustomerWithAddress.get);
-        log.debug("street:    " + createCustomerWithAddress.getStreet());
 
         User newUser = new User();
-
-
         Address newAddress = new Address();
 
         newUser.setUsername(createCustomerWithAddress.getUsername());
-        log.debug("ln64 Newusername" + createCustomerWithAddress.getUsername());
-
         newUser.setPassword(passwordEncoder.encode(createCustomerWithAddress.getPassword()));
         newUser.setEnabled(true);
 
         newAddress.setStreet(createCustomerWithAddress.getStreet());
+        newAddress.setCity(createCustomerWithAddress.getCity());
+        newAddress.setPostalcode(createCustomerWithAddress.getPostalcode());
+        newAddress.setTelnumber(createCustomerWithAddress.getTelnumber());
 
 
-        String realName = newUser.getUsername();
-        log.debug("realName:  " + realName);
-
-
-        log.debug("newUser" + newUser.toString());
-
-
-        log.debug("newAddress:  " + newAddress.toString());
-
-
-//
+//  Methode 1:  hier 2x toegang tot database en de newUser met adres wordt teruggegeven
 
         addressRepository.save(newAddress);
+//        hier wordt de foreignkey geset
         newUser.setAddresses(List.of(newAddress));
 
         userRepository.save(newUser);
-        userService.addAuthority(realName, Role.CUSTOMER);
-//        newAddress.setUser(newUser);
-
-//        en nu nog de foreignkey
-
-//        newUser.setAddresses(newAddress.getUser().getAddresses());
-
-
+        userService.addAuthority(newUser.getUsername(), Role.CUSTOMER);
         return (newUser);
-    }
 
 
-    @Override
-    public User createNewCustomer(User user) {
+//// Methode 2: hier 3x toegang tot database en de newUser wordt zonder address teruggegeven
+//        addressRepository.save(newAddress);
+//        userRepository.save(newUser);
+//        userService.addAuthority(newUser.getUsername(), Role.CUSTOMER);
+//         hier wordt de foreignkey geset
+//        newAddress.setUser(newUser);
+//        userRepository.save(newUser);
+//        return (newUser);
 
-        String newUser = userService.createUser(user);
-        userService.addAuthority(newUser, Role.CUSTOMER);
-
-        System.out.println("CustomerService Impl create newCustomer");
-
-        return userService.getUser(newUser);
 
     }
 

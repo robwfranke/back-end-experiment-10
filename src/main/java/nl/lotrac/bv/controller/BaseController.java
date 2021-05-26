@@ -30,11 +30,10 @@ public class BaseController {
     @PostMapping(value = "/createCustomerWithAddress")
 
     public ResponseEntity<Object> createCustomerWithAddress(@RequestBody CreateCustomerWithAddress createCustomerWithAddress) {
-        log.debug("BaseController, /createCustomerWithAddress:  " + createCustomerWithAddress.toString());
 
         User user = customerService.createCustomerWithAddress(createCustomerWithAddress);
 
-
+//        hier adres op geven waar je customer of user kunt opvragen
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{createCustomerWithAddress}")
                 .buildAndExpand(user.getUsername()).toUri();
 
@@ -43,19 +42,6 @@ public class BaseController {
     }
 
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<User> createNewCustomer(@RequestBody User user) {
 
-        System.out.println("BaseController, createNewCustomer");
-
-        User newCustomername = customerService.createNewCustomer(user);
-
-
-//        hier adres op geven waar je customer of user kunt opvragen
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/users/name/" + newCustomername.getUsername())
-                .buildAndExpand(newCustomername).toUri();
-
-        return ResponseEntity.created(location).body(newCustomername);
-    }
 
 }

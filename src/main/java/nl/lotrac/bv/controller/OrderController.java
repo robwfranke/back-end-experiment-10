@@ -1,5 +1,6 @@
 package nl.lotrac.bv.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.Order;
 import nl.lotrac.bv.service.OrderService;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequestMapping(value = "/orders")
 
 
+@Slf4j
 public class OrderController {
 
     @Autowired
@@ -86,6 +88,7 @@ public class OrderController {
     @PutMapping(value = "/update/{ordername}")
 
     public ResponseEntity<Object> updateOrder(@PathVariable("ordername") String ordername, @RequestBody Order order) {
+        log.debug("Ordercontroller");
         orderService.updateOrder(ordername, order);
         return ResponseEntity.noContent().build();
     }

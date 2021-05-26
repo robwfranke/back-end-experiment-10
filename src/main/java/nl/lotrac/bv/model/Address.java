@@ -40,7 +40,7 @@ public class Address {
     @Column(length = 255)
     private String telnumber;
 
-//@JsonIgnore
+@JsonIgnore
     @ManyToOne
     @JoinColumn(name="fk1_user")
 private User user;

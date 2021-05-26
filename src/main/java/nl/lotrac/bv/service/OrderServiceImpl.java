@@ -91,6 +91,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void updateOrder(String ordername, Order newOrder) {
+        log.debug("update order: "+newOrder);
         System.out.println("ordername");
         Order order = orderRepository.getOrderByOrdername(ordername);
 

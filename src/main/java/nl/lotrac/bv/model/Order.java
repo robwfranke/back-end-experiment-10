@@ -30,6 +30,9 @@ public class Order {
     @Column(nullable = false, unique = true)
     private String ordername;
 
+    @Column
+    private String description;
+
     @Column(nullable = false, length = 255)
     private String status;
 
